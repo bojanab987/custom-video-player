@@ -5,17 +5,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/24da5fb4aa.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./src/css/style.css">
     <title>Video Player</title>
 </head>
 
 <body>
     <main class="container">
-        <video controls class="video" id="video" preload="metadata" poster="./src/assets/poster.jpg">
-            <source src="./src/assets/clip2.mp4" type="video/mp4">
-            <source src="./src/assets/clip2.oggtheora.ogv" type="video/ogg">
-            <source src="./src/assets/clip2.webmsd.webm" type="video/webm">
-        </video>
+        <div class="video-container">
+            <video controls class="video js-video" id="video" preload="metadata" poster="./src/assets/poster.jpg">
+                <source src="./src/assets/clip2.mp4" type="video/mp4">
+                <source src="./src/assets/clip2.oggtheora.ogv" type="video/ogg">
+                <source src="./src/assets/clip2.webmsd.webm" type="video/webm">
+            </video>
+<div class="video-controls hidden js-controls">
+    <div class="video-progress">
+        <progress class="progress-bar" value="0" min="0"></progress>
+        <input class="seek" id="seek" value="0" min="0" type="range" step="1">
+        <div class="seek-tooltip" id="seek-tooltip">00:00</div>
+    </div>
+
+    <div class="controls-left">
+        <button class="btn play-pause js-togglePlay">Play</button>
+        <button class="btn">Stop</button>
+        <button class="btn" id="begin">&lt;&lt;</button>
+        <button class="btn" id="rewind">&lt;</button>
+        <button class="btn" id="fastForward">&gt;</button>
+        <button class="btn" id="end">&gt;&gt;</button>
+
+        <div class="volume-controls">
+            <button data-title="Mute (m)" class="volume-button" id="volume-button">
+                <span>
+                    <i class="fas fa-volume-mute hidden"></i>
+                    <i class="fas fa-volume-down hidden"></i>
+                    <i class="fas fa-volume-up"></i>
+                </span>
+            </button>
+
+            <input class="volume" id="volume" value="1" type="range" max="1" min="0" step="0.01">
+        </div>
+
+        <div class="time">
+            <time class="time-elapsed">00:00</time>
+            <span> / </span>
+            <time class="duration">00:00</time>
+        </div>
+    </div>
+
+    <div class="controls-right">
+        <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button">
+            <span>
+                <i class="fas fa-expand"></i>
+                <i class="fas fa-compress-arrows-alt hidden"></i>
+            </span>
+        </button>
+    </div>
+</div>
+</div>
     </main>
     <script src="./src/js/index.js"></script>
 </body>
