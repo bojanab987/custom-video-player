@@ -15,6 +15,11 @@ const videoDurationEl = document.querySelector('.js-duration');
 const progressBarEl = document.querySelector('.js-progress-bar');
 const seekEl = document.querySelector('.js-seek');
 const seekToolTipEl = document.querySelector('.js-seek-tooltip');
+const toBeginBtn = document.querySelector('.js-to-begin');
+const rewindBtn = document.querySelector('.js-rewind');
+const fastForwardBtn = document.querySelector('.js-fastForward');
+const toEndBtn = document.querySelector('.js-to-end');
+const TIME_STEP = 5;
 
 videoEl.addEventListener('loadedmetadata', initializeVideo);
 videoEl.addEventListener('play', updatePlayBtn);
@@ -25,6 +30,31 @@ playPauseBtn.addEventListener('click', togglePlay);
 stopBtn.addEventListener('click', stopVideo);
 seekEl.addEventListener('mousemove', updateSeekTooltip);
 seekEl.addEventListener('input', skipAhead);
+
+//On click set current time to beggining and update seek tooltip
+toBeginBtn.addEventListener('click', () => {
+    videoEl.currentTime = 0;
+    updateSeekTooltip();
+});
+
+//On click rewind video 5 seconds and update seek tooltip
+rewindBtn.addEventListener('click', () => {
+    videoEl.currentTime -= TIME_STEP;
+    updateSeekTooltip();
+});
+
+//On click fast forward track 5 seconds and updates tooltip
+fastForwardBtn.addEventListener('click', () => {
+    videoEl.currentTime += TIME_STEP;
+    updateSeekTooltip();
+});
+
+//On click set current time to end of track/video duration and updates seek tooltip
+toEndBtn.addEventListener('click', () => {
+    videoEl.currentTime = videoEl.duration;
+    updateSeekTooltip();
+});
+
 
 //If the video is paused or ended, the video is played, if not, then video is paused
 function togglePlay() {
@@ -84,7 +114,6 @@ function updateProgressBar() {
     progressBarEl.value = Math.floor(videoEl.currentTime);
 }
 
-
 function updateTimeAndProgress() {
     updateTimeElapsed();
     updateProgressBar();
@@ -109,3 +138,4 @@ function skipAhead(e) {
     progressBarEl.value = skipTo;
     seekEl.value = skipTo;
 }
+
