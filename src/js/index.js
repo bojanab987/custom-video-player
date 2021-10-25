@@ -14,7 +14,7 @@ const timeElapsedEl = document.querySelector('.js-time-elapsed');
 const videoDurationEl = document.querySelector('.js-duration');
 const progressBarEl = document.querySelector('.js-progress-bar');
 const seekEl = document.querySelector('.js-seek');
-
+const seekToolTipEl = document.querySelector('.js-seek-tooltip');
 
 videoEl.addEventListener('loadedmetadata', initializeVideo);
 videoEl.addEventListener('play', updatePlayBtn);
@@ -22,8 +22,9 @@ videoEl.addEventListener('pause', updatePlayBtn);
 videoEl.addEventListener('timeupdate', updateTimeAndProgress);
 
 playPauseBtn.addEventListener('click', togglePlay);
-stopBtn.addEventListener('click', stopVideo)
-
+stopBtn.addEventListener('click', stopVideo);
+seekEl.addEventListener('mousemove', updateSeekTooltip);
+seekEl.addEventListener('input', skipAhead);
 
 //If the video is paused or ended, the video is played, if not, then video is paused
 function togglePlay() {
@@ -47,7 +48,7 @@ function stopVideo() {
     videoEl.pause();
     videoEl.currentTime = 0;
     videoEl.playbackRate = 1;
-    playbackRate.val(1);
+    // playbackRate.value=1;
 }
 
 //Takes time length in seconds and returns it in minutes and seconds
@@ -87,4 +88,24 @@ function updateProgressBar() {
 function updateTimeAndProgress() {
     updateTimeElapsed();
     updateProgressBar();
+}
+
+//Function by using mouse position on the progress bar shows seek tooltip with approx time of video on that position
+function updateSeekTooltip(e) {
+    const skipTo = Math.round((e.offsetX / e.target.clientWidth) * parseInt(e.target.getAttribute('max'), 10));
+    seekEl.setAttribute('data-seek', skipTo);
+    console.log(e.target)
+    const time = formatTime(skipTo);
+    seekToolTipEl.textContent = `${time.minutes}:${time.seconds}`;
+    const rectangl = videoEl.getBoundingClientRect();
+    seekToolTipEl.style.left = `${e.pageX - rectangl.left}px`;
+}
+
+//When value of the seek element changes (when progress bar is clicked on certain point) video skips ahead to 
+//a that point (time where is clicked)
+function skipAhead(e) {
+    const skipTo = e.target.dataset.seek ? e.target.dataset.seek : e.target.value;
+    videoEl.currentTime = skipTo;
+    progressBarEl.value = skipTo;
+    seekEl.value = skipTo;
 }
