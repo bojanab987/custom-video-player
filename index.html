@@ -12,7 +12,7 @@
 
 <body>
     <main class="container">
-        <div class="video-container">
+        <div class="video-container js-video-container">
             <video controls class="video js-video" id="video" preload="metadata" poster="./src/assets/poster.jpg">
                 <source src="./src/assets/clip2.mp4" type="video/mp4">
                 <source src="./src/assets/clip2.oggtheora.ogv" type="video/ogg">
@@ -62,10 +62,10 @@
                         <button class=" js-playback-rate" value=1.5>1.5</button>
                         <button class="js-playback-rate" value=2.0>2.0</button>
                     </div>
-                    <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button">
+                    <button data-title="Full screen (f)" class="fullscreen-button js-fullscreen" id="fullscreen-button">
                         <span>
-                            <i class="fas fa-expand"></i>
-                            <i class="fas fa-compress-arrows-alt hidden"></i>
+                            <i class="fas fa-expand js-toggle-screen"></i>
+                            <i class="fas fa-compress-arrows-alt hidden js-toggle-screen"></i>
                         </span>
                     </button>
                 </div>

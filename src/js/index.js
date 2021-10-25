@@ -30,6 +30,10 @@ const volumeEl = document.querySelector('.js-volume');
 
 const playBackBtns = document.querySelectorAll('.js-playback-rate');
 
+const fullscreenBtn = document.querySelector('.js-fullscreen');
+const videoContainerEl = document.querySelector('.js-video-container');
+const toggleScreenBtns = document.querySelectorAll('.js-toggle-screen');
+
 videoEl.addEventListener('loadedmetadata', initializeVideo);
 videoEl.addEventListener('play', updatePlayBtn);
 videoEl.addEventListener('pause', updatePlayBtn);
@@ -72,8 +76,11 @@ playBackBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         console.log(parseFloat(e.target.value))
         setPlayBackSpeed(parseFloat(e.target.value))
-    })
-})
+    });
+});
+
+fullscreenBtn.addEventListener('click', toggleFullScreen);
+videoContainerEl.addEventListener('fullscreenchange', changeFullScreenIcon);
 
 //If the video is paused or ended, the video is played, if not, then video is paused
 function togglePlay() {
@@ -199,4 +206,24 @@ function toggleMute() {
 
 function setPlayBackSpeed(value) {
     videoEl.playbackRate = value;
+}
+
+function toggleFullScreen() {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        videoContainerEl.requestFullscreen();
+    }
+}
+
+function changeFullScreenIcon() {
+    toggleScreenBtns.forEach(i => {
+        i.classList.toggle('hidden')
+    });
+
+    if (document.fullscreenElement) {
+        fullscreenBtn.setAttribute('data-title', 'Exit full screen (f)')
+    } else {
+        fullscreenBtn.setAttribute('data-titl', 'Full screen (f)')
+    }
 }
