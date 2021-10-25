@@ -28,6 +28,8 @@ const volumeLowBtn = document.querySelector('.js-volume-low');
 const volumeHighBtn = document.querySelector('.js-volume-high');
 const volumeEl = document.querySelector('.js-volume');
 
+const playBackBtns = document.querySelectorAll('.js-playback-rate');
+
 videoEl.addEventListener('loadedmetadata', initializeVideo);
 videoEl.addEventListener('play', updatePlayBtn);
 videoEl.addEventListener('pause', updatePlayBtn);
@@ -66,6 +68,13 @@ toEndBtn.addEventListener('click', () => {
 volumeEl.addEventListener('input', updateVolume);
 volumeBtn.addEventListener('click', toggleMute);
 
+playBackBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        console.log(parseFloat(e.target.value))
+        setPlayBackSpeed(parseFloat(e.target.value))
+    })
+})
+
 //If the video is paused or ended, the video is played, if not, then video is paused
 function togglePlay() {
     if (videoEl.paused || videoEl.ended) {
@@ -88,7 +97,6 @@ function stopVideo() {
     videoEl.pause();
     videoEl.currentTime = 0;
     videoEl.playbackRate = 1;
-    // playbackRate.value=1;
 }
 
 //Takes time length in seconds and returns it in minutes and seconds
@@ -187,4 +195,8 @@ function toggleMute() {
     } else {
         volumeEl.value = volumeEl.dataset.volume;
     }
+}
+
+function setPlayBackSpeed(value) {
+    videoEl.playbackRate = value;
 }
