@@ -21,10 +21,18 @@ const fastForwardBtn = document.querySelector('.js-fastForward');
 const toEndBtn = document.querySelector('.js-to-end');
 const TIME_STEP = 5;
 
+const volumeBtn = document.querySelector('.js-volume-button');
+const volumeIcons = document.querySelectorAll('.js-volume-icons');
+const volumeMuteBtn = document.querySelector('.js-mute');
+const volumeLowBtn = document.querySelector('.js-volume-low');
+const volumeHighBtn = document.querySelector('.js-volume-high');
+const volumeEl = document.querySelector('.js-volume');
+
 videoEl.addEventListener('loadedmetadata', initializeVideo);
 videoEl.addEventListener('play', updatePlayBtn);
 videoEl.addEventListener('pause', updatePlayBtn);
 videoEl.addEventListener('timeupdate', updateTimeAndProgress);
+videoEl.addEventListener('volumechange', changeVolumeIcon);
 
 playPauseBtn.addEventListener('click', togglePlay);
 stopBtn.addEventListener('click', stopVideo);
@@ -55,6 +63,8 @@ toEndBtn.addEventListener('click', () => {
     updateSeekTooltip();
 });
 
+volumeEl.addEventListener('input', updateVolume);
+volumeBtn.addEventListener('click', toggleMute);
 
 //If the video is paused or ended, the video is played, if not, then video is paused
 function togglePlay() {
@@ -123,7 +133,6 @@ function updateTimeAndProgress() {
 function updateSeekTooltip(e) {
     const skipTo = Math.round((e.offsetX / e.target.clientWidth) * parseInt(e.target.getAttribute('max'), 10));
     seekEl.setAttribute('data-seek', skipTo);
-    console.log(e.target)
     const time = formatTime(skipTo);
     seekToolTipEl.textContent = `${time.minutes}:${time.seconds}`;
     const rectangl = videoEl.getBoundingClientRect();
@@ -139,3 +148,43 @@ function skipAhead(e) {
     seekEl.value = skipTo;
 }
 
+//set sound volume
+function updateVolume() {
+    if (videoEl.muted) {
+        videoEl.muted = false;
+    }
+    videoEl.volume = volumeEl.value;
+}
+
+//Set volume icon depending on volume range
+function changeVolumeIcon() {
+    volumeIcons.forEach(i => {
+        i.classList.add('hidden')
+    });
+
+    volumeBtn.setAttribute('data-title', 'Mute (m)')
+
+    if (videoEl.muted || videoEl.volume === 0) {
+        volumeMuteBtn.classList.remove('hidden');
+        console.log(volumeBtn.innerHTML)
+        volumeBtn.setAttribute('data-title', 'Unmute (m)');
+    } else if (videoEl.volume > 0 && videoEl.volume <= 0.5) {
+        volumeLowBtn.classList.remove('hidden');
+        console.log(volumeBtn.innerHTML)
+    } else {
+        volumeHighBtn.classList.remove('hidden');
+        console.log(volumeBtn.innerHTML)
+    }
+}
+
+//When video is unmuted, volume is set to value before the video was muted
+function toggleMute() {
+    videoEl.muted = !videoEl.muted;
+
+    if (videoEl.muted) {
+        volumeEl.setAttribute('data-volume', volumeEl.value);
+        volumeEl.value = 0;
+    } else {
+        volumeEl.value = volumeEl.dataset.volume;
+    }
+}
