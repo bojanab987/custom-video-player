@@ -18,50 +18,52 @@
                 <source src="./src/assets/clip2.oggtheora.ogv" type="video/ogg">
                 <source src="./src/assets/clip2.webmsd.webm" type="video/webm">
             </video>
-<div class="video-controls hidden js-controls">
-    <div class="video-progress">
-        <progress class="progress-bar js-progress-bar" value="0" min="0"></progress>
-        <input class="seek js-seek" id="seek" value="0" min="0" type="range" step="1">
-        <div class="seek-tooltip js-seek-tooltip" id="seek-tooltip">00:00</div>
-    </div>
 
-    <div class="controls-left">
-        <button class="btn play-pause js-togglePlay">Play</button>
-        <button class="btn js-stop">Stop</button>
-        <button class="btn" id="begin">&lt;&lt;</button>
-        <button class="btn" id="rewind">&lt;</button>
-        <button class="btn" id="fastForward">&gt;</button>
-        <button class="btn" id="end">&gt;&gt;</button>
+            <div class="video-controls hidden js-controls">
+                <div class="video-progress">
+                    <progress class="progress-bar js-progress-bar" value="0" min="0"></progress>
+                    <input class="input seek js-seek" id="seek" value="0" min="0" type="range" step="1">
+                    <div class="seek-tooltip js-seek-tooltip" id="seek-tooltip">00:00</div>
+                    </div>
 
-        <div class="volume-controls">
-            <button data-title="Mute (m)" class="volume-button" id="volume-button">
-                <span>
-                    <i class="fas fa-volume-mute hidden"></i>
-                    <i class="fas fa-volume-down hidden"></i>
-                    <i class="fas fa-volume-up"></i>
-                </span>
-            </button>
+                <div class="video-controls-bottom">
+                <div class="controls-left">
+                    <button class="btn play-pause js-togglePlay">Play</button>
+                    <button class="btn js-stop">Stop</button>
+                    <button class="btn" id="begin">&lt;&lt;</button>
+                    <button class="btn" id="rewind">&lt;</button>
+                    <button class="btn" id="fastForward">&gt;</button>
+                    <button class="btn" id="end">&gt;&gt;</button>
 
-            <input class="volume" id="volume" value="1" type="range" max="1" min="0" step="0.01">
+                    <div class="volume-controls">
+                        <button data-title="Mute (m)" class="volume-button" id="volume-button">
+                            <span>
+                                <i class="fas fa-volume-mute hidden"></i>
+                                <i class="fas fa-volume-down hidden"></i>
+                                <i class="fas fa-volume-up"></i>
+                            </span>
+                        </button>
+                        <input class="input volume" id="volume" value="1" type="range" max="1" min="0" step="0.01">
+                        </div>
+
+                    <div class="time">
+                        <time class="time-elapsed js-time-elapsed">00:00</time>
+                        <span> / </span>
+                        <time class="duration js-duration">00:00</time>
+                    </div>
+                    </div>
+
+                <div class="controls-right">
+                    <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button">
+                        <span>
+                            <i class="fas fa-expand"></i>
+                            <i class="fas fa-compress-arrows-alt hidden"></i>
+                        </span>
+                    </button>
+                </div>
+                </div>
+                </div>
         </div>
-
-        <div class="time">
-            <time class="time-elapsed js-time-elapsed">00:00</time>
-            <span> / </span>
-            <time class="duration js-duration">00:00</time>
-        </div>
-    </div>
-
-    <div class="controls-right">
-        <button data-title="Full screen (f)" class="fullscreen-button" id="fullscreen-button">
-            <span>
-                <i class="fas fa-expand"></i>
-                <i class="fas fa-compress-arrows-alt hidden"></i>
-            </span>
-        </button>
-    </div>
-</div>
-</div>
     </main>
     <script src="./src/js/index.js"></script>
 </body>

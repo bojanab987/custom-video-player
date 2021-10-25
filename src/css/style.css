@@ -8,6 +8,159 @@ body{
     height: 100%;;
 }
 
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container {
+    width: 800px;    
+    margin: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+}
+
+.video-controls {
+    right: 0;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    transition: all 0.2s ease;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+}
+.video-progress {
+    position: relative;
+    height: 10px;
+    margin-bottom: 10px;
+  }
+
+  progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 10px;
+    width: 100%;
+    height: 10px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+  }
+  
+  progress::-webkit-progress-bar {
+    background-color: #474545;
+    border-radius: 10px;
+  }
+  
+  progress::-webkit-progress-value {
+    background: #358912;
+    border-radius: 10px;
+  }
+  
+  progress::-moz-progress-bar {
+    border: #358912;
+    background: #358912;
+  }
+
+  .video-controls-bottom{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .controls-left{
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+  .controls-right{
+    display:flex;    
+  }
+
 .hidden {
     display: none;
 }
+
+.seek {
+    position: absolute;
+    top:0;
+    width: 100%;
+    
+    height: 10px;  
+}
+
+.seek:hover+.seek-tooltip{
+    display: block;
+}
+
+.seek-tooltip{
+    display: none;
+    position:absolute;
+    top:-30px;
+    margin-left:-10px;
+    font-size: 14px;
+    padding: 3px;
+    content: attr(data-title);
+    color:#fff;
+    background-color: rgba(41, 18, 18, 0.4);
+}
+
+.input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.input:focus {
+    outline: none;
+  }
+
+ .input::-webkit-slider-runnable-track{
+    width: 100%;
+    cursor: pointer;
+    border-radius: 1.3px;
+    -webkit-appearance: none;
+    transition: all 0.4s ease;
+}
+
+.input::-webkit-slider-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 20px;    
+    cursor: pointer;
+    background-color: #358912;
+    -webkit-appearance: none;
+    margin-left: -3px;
+}
+  
+ .input:focus::-webkit-slider-runnable-track {
+    background: transparent;
+}
+
+.volume {
+    height: 5px;
+    background-color: #fff;
+}
+  
+.volume::-webkit-slider-runnable-track {
+    background-color: transparent;
+  }
+  
+.volume::-webkit-slider-thumb {
+    margin-left: 0;
+    height: 12px;
+    width: 12px;
+    background: #fff;
+}
+  
